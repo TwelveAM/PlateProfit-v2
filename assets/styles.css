@@ -1,0 +1,378 @@
+/* Base layout and typography */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+/* Centered container used on every page */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header and navigation */
+header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #dddddd;
+}
+
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 12px 20px 0;
+  text-align: center;
+}
+
+/* Hero banner with icons */
+.hero-banner {
+  width: 630px;
+  max-width: 100%;
+  height: 130px;
+  margin: 20px auto;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #0b5d3f, #06412a);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+}
+
+.hero-icons {
+  font-size: 42px;
+  opacity: 0.9;
+}
+
+.hero-title-block {
+  text-align: center;
+  flex: 1;
+  margin: 0 24px;
+}
+
+.hero-title-banner {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero-subtitle-banner {
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Navigation pills */
+nav {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 14px;
+  color: #222222;
+  padding: 6px 12px;
+  border-radius: 999px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(11, 93, 63, 0.1);
+}
+
+.nav-link.active {
+  background-color: #0b5d3f;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Small form controls and buttons */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 15px;
+  border-radius: 12px;
+  border: 1px solid #cfd5db;
+  background: #ffffff;
+  box-sizing: border-box;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #0b6e46;
+  box-shadow: 0 0 0 2px rgba(11, 110, 70, 0.15);
+}
+
+.small-input {
+  width: 110px;
+}
+
+button,
+.btn {
+  font-size: 14px;
+  padding: 9px 16px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: 0.22s ease;
+}
+
+/* Variant for smaller buttons (used in table rows) */
+.small {
+  font-size: 13px;
+  padding: 6px 12px;
+}
+
+.btn-primary,
+button.btn-primary {
+  background: #0b6e46;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #095a38;
+}
+
+.btn-secondary {
+  background: #e3e7ea;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #d6dbdf;
+}
+
+.btn-danger {
+  background: #e54c4c;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #c73d3d;
+}
+
+/* Generic select styling for dynamic selects */
+.form-select {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 15px;
+  border-radius: 12px;
+  border: 1px solid #cfd5db;
+  background: #ffffff;
+  box-sizing: border-box;
+  outline: none;
+}
+.form-select:focus {
+  border-color: #0b6e46;
+  box-shadow: 0 0 0 2px rgba(11, 110, 70, 0.15);
+}
+
+/* Recipe ingredient row layout */
+.recipe-ingredient-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.recipe-ingredient-row select,
+.recipe-ingredient-row input {
+  flex: 1;
+  min-width: 120px;
+}
+.recipe-ingredient-row .remove-btn {
+  margin-left: auto;
+}
+
+/* Danger zone emphasised heading */
+.danger-zone h3 {
+  color: #aa2e25;
+}
+
+/* Pills for category/sub-type filters */
+.filter-pill {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 50px;
+  background: #e3e7ea;
+  margin: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 14px;
+}
+
+.filter-pill:hover {
+  background: #d6dbdf;
+}
+
+.filter-pill-active {
+  background: #0b6e46 !important;
+  color: #fff !important;
+}
+
+/* Card used for recently updated items */
+.card-updated {
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #d9dee3;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.card-updated-title {
+  font-weight: 600;
+  color: #0b6e46;
+  font-size: 14px;
+}
+
+.card-updated small {
+  color: #666;
+  font-size: 12px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+thead {
+  background: #f0f2f5;
+}
+
+th,
+td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #eceff2;
+}
+
+th {
+  text-align: left;
+  font-weight: 600;
+  color: #5a5a5a;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Recipe cards */
+.recipe-box {
+  background: #fff;
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid #dde2e6;
+  margin-bottom: 22px;
+}
+
+.recipe-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0b6e46;
+}
+
+.recipe-summary {
+  margin-top: 8px;
+  font-size: 15px;
+  color: #555;
+}
+
+/* Settings page boxes */
+.settings-box {
+  background: #fff;
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid #dde2e6;
+  margin-top: 20px;
+}
+
+.settings-title {
+  font-size: 19px;
+  font-weight: 600;
+  color: #0b6e46;
+  margin-bottom: 20px;
+}
+
+.settings-note {
+  color: #666;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Miscellaneous */
+hr {
+  border: none;
+  border-top: 1px solid #e1e4e7;
+  margin: 25px 0;
+}
+
+.text-muted {
+  color: #777;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Print tweaks for purchases page */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+  body {
+    background: #ffffff;
+  }
+  header,
+  #add-item-form,
+  .btn,
+  .btn-primary,
+  .btn-secondary {
+    display: none !important;
+  }
+  .page {
+    max-width: none;
+    padding: 0;
+  }
+  table.table {
+    border-collapse: collapse;
+    font-size: 11px;
+    width: 100%;
+  }
+  table.table th,
+  table.table td {
+    border: 1px solid #cccccc;
+    padding: 4px 6px;
+  }
+}
