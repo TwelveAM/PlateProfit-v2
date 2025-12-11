@@ -7,11 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Settings – ProfitPlate v2</title>
     <link rel="stylesheet" href="assets/styles.css" />
+    <!-- Translation helper -->
+    <script src="assets/lang.js"></script>
   </head>
   <body>
     <div id="site-header"></div>
     <div class="page">
-      <h1>Settings</h1>
+      <h1 data-i18n="settings_title">Settings</h1>
       <p class="text-muted" style="margin-bottom:24px;">
         Adjust how ProfitPlate behaves in your kitchen – currency, display options
         and data controls. In the real app, these settings would be stored in
@@ -19,7 +21,7 @@
       </p>
       <!-- General settings -->
       <div class="settings-box" id="settings-general">
-        <div class="settings-title">General</div>
+        <div class="settings-title" data-i18n="settings_general">General</div>
         <div style="margin-bottom:16px;">
           <label for="currency-select">Currency</label><br />
           <select id="currency-select"></select>
@@ -31,10 +33,21 @@
             <option value="us">1,234.56 (US/UK style)</option>
           </select>
         </div>
+
+        <!-- Language selection -->
+        <div style="margin-bottom:16px;">
+          <label for="language-select">Language</label><br />
+          <select id="language-select">
+            <option value="en">English</option>
+            <option value="ro">Română</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+          </select>
+        </div>
       </div>
       <!-- Behaviour settings -->
       <div class="settings-box" id="settings-behaviour">
-        <div class="settings-title">Behaviour</div>
+        <div class="settings-title" data-i18n="settings_behaviour">Behaviour</div>
         <label style="display:block; margin-bottom:12px;">
           <input type="checkbox" id="auto-recalc-toggle" /> Auto‑recalculate
           recipes
@@ -54,7 +67,7 @@
       </div>
       <!-- Data settings -->
       <div class="settings-box" id="settings-data">
-        <div class="settings-title">Data &amp; Local Storage</div>
+        <div class="settings-title" data-i18n="settings_data">Data &amp; Local Storage</div>
         <p class="text-muted" style="margin-bottom:16px;">
           ProfitPlate keeps everything in your browser. No server, no cloud.
         </p>
@@ -63,6 +76,18 @@
           <button id="remove-demo-btn" class="btn btn-secondary">
             Remove Demo Items
           </button>
+        </div>
+
+        <!-- Import / Export section -->
+        <div style="margin-bottom:16px;">
+          <h3 style="margin:0 0 8px; font-size:1.1rem;">Import/Export</h3>
+          <button id="export-data-btn" class="btn btn-secondary" style="margin-right:8px;">
+            Export Data
+          </button>
+          <button id="import-data-btn" class="btn btn-secondary">
+            Import Data
+          </button>
+          <input type="file" id="import-data-file" accept=".json" style="display:none" />
         </div>
         <hr />
         <div class="danger-zone" style="margin-top:16px;">
@@ -83,6 +108,8 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         if (typeof renderHeader === 'function') renderHeader('settings');
+        // After rendering the header, translate navigation and other text
+        if (typeof translatePage === 'function') translatePage();
         // Populate currency options
         const currencySelect = document.getElementById('currency-select');
         const currencyOptions = [
@@ -131,6 +158,42 @@
               window.saveSettings({ showAdvanced: this.checked });
             }
           });
+
+        // Handle language selection
+        const langSelect = document.getElementById('language-select');
+        if (langSelect) {
+          // Set current language from settings (defined above)
+          langSelect.value = settings.language || 'en';
+          langSelect.addEventListener('change', function () {
+            if (window.saveSettings) {
+              window.saveSettings({ language: this.value });
+            }
+            if (typeof translatePage === 'function') translatePage();
+          });
+        }
+        // Export data handler
+        const exportBtn = document.getElementById('export-data-btn');
+        if (exportBtn) {
+          exportBtn.addEventListener('click', function () {
+            if (window.exportData) window.exportData();
+          });
+        }
+        // Import data handler
+        const importBtn = document.getElementById('import-data-btn');
+        const importFile = document.getElementById('import-data-file');
+        if (importBtn && importFile) {
+          importBtn.addEventListener('click', function () {
+            importFile.click();
+          });
+          importFile.addEventListener('change', function () {
+            const file = importFile.files && importFile.files[0];
+            if (file && window.importData) {
+              window.importData(file);
+            }
+            // Clear file input value to allow re-importing the same file
+            importFile.value = '';
+          });
+        }
         // Remove demo data
         document
           .getElementById('remove-demo-btn')

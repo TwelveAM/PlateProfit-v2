@@ -7,11 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Purchases – ProfitPlate v2</title>
     <link rel="stylesheet" href="assets/styles.css" />
+    <!-- Translation helper -->
+    <script src="assets/lang.js"></script>
   </head>
   <body>
     <div id="site-header"></div>
     <div class="page">
-      <h1>Purchases</h1>
+      <h1 data-i18n="purchases_title">Purchases</h1>
       <p class="text-muted" style="margin-bottom:24px;">
         This is your ingredient base. Add items you buy, organise them by
         category, and keep supplier prices up to date. Recipes will use
@@ -180,6 +182,8 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         if (typeof renderHeader === 'function') renderHeader('purchases');
+        // Apply translations after header has rendered
+        if (typeof translatePage === 'function') translatePage();
       });
     </script>
   </body>

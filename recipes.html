@@ -7,11 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recipes – ProfitPlate v2</title>
     <link rel="stylesheet" href="assets/styles.css" />
+    <!-- Translation helper -->
+    <script src="assets/lang.js"></script>
   </head>
   <body>
     <div id="site-header"></div>
     <div class="page">
-      <h1>Recipes</h1>
+      <h1 data-i18n="recipes_title">Recipes</h1>
       <p class="text-muted" style="margin-bottom:24px;">
         Build your recipes by picking ingredients from Purchases and see cost per
         portion, selling price and margin. Each recipe is saved locally in your
@@ -68,6 +70,8 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         if (typeof renderHeader === 'function') renderHeader('recipes');
+        // Apply translations after header has rendered
+        if (typeof translatePage === 'function') translatePage();
       });
     </script>
   </body>

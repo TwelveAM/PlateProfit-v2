@@ -8,6 +8,8 @@
     <title>ProfitPlate v2 – Know your profit per plate</title>
     <!-- Unified styles for all pages -->
     <link rel="stylesheet" href="assets/styles.css" />
+    <!-- Translation helper -->
+    <script src="assets/lang.js"></script>
   </head>
   <body>
     <!-- Shared header will be rendered here -->
@@ -15,7 +17,7 @@
     <div class="page">
       <!-- Hero section with call to action -->
       <section class="home-hero" style="text-align:center; margin-bottom:40px;">
-        <h1 style="font-size:2.2rem; font-weight:700; margin-bottom:16px;">
+        <h1 data-i18n="home_headline" style="font-size:2.2rem; font-weight:700; margin-bottom:16px;">
           Stop guessing. Know your dish cost.
         </h1>
         <p style="font-size:1.1rem; max-width:600px; margin:0 auto 24px;">
@@ -92,6 +94,10 @@
       document.addEventListener('DOMContentLoaded', function () {
         if (typeof renderHeader === 'function') {
           renderHeader('home');
+        }
+        // Apply translations after header has rendered
+        if (typeof translatePage === 'function') {
+          translatePage();
         }
       });
     </script>
