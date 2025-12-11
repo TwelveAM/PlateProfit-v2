@@ -390,6 +390,41 @@
       }
       summary.textContent = summaryText;
       card.appendChild(summary);
+
+      // --- Recipe scaling ---
+      // Allow adjusting the number of portions for this recipe directly from the card.
+      // Changing the value updates the stored recipe and re-renders the list.
+      const scaleContainer = document.createElement("div");
+      scaleContainer.className = "recipe-scale";
+      scaleContainer.style.marginTop = "6px";
+      const scaleLabel = document.createElement("label");
+      scaleLabel.textContent = "Portions:";
+      scaleLabel.style.marginRight = "4px";
+      const scaleInput = document.createElement("input");
+      scaleInput.type = "number";
+      scaleInput.min = "1";
+      scaleInput.step = "1";
+      scaleInput.value = recipe.portions || 1;
+      scaleInput.style.width = "60px";
+      scaleInput.addEventListener("change", () => {
+        const newVal = Number(scaleInput.value);
+        if (!newVal || newVal <= 0) {
+          scaleInput.value = recipe.portions || 1;
+          return;
+        }
+        if (newVal !== recipe.portions) {
+          recipe.portions = newVal;
+          const store = getStore();
+          if (store) {
+            store.upsertRecipe(recipe);
+          }
+          // Re-render to recalculate costs and update UI
+          renderRecipes();
+        }
+      });
+      scaleContainer.appendChild(scaleLabel);
+      scaleContainer.appendChild(scaleInput);
+      card.appendChild(scaleContainer);
       if (showAdvanced) {
         const tableWrapper = document.createElement("div");
         tableWrapper.style.marginTop = "12px";

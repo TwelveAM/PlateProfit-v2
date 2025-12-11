@@ -173,6 +173,84 @@
   }
   window.loadSettings = loadSettings;
   window.saveSettings = saveSettings;
+
+  // ===========================
+  // Import / Export helpers
+  // ===========================
+  /**
+   * Export all purchases and recipes to a JSON file. The resulting file
+   * contains two top‑level arrays: `purchases` and `recipes`. A download
+   * link is created on the fly and triggered automatically.
+   */
+  window.exportData = function exportData() {
+    try {
+      const store = window.ppStore;
+      if (!store) return;
+      const data = {
+        purchases: store.getPurchases(),
+        recipes: store.getRecipes(),
+      };
+      const json = JSON.stringify(data, null, 2);
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "profitplate-data.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("ProfitPlate export failed", err);
+      alert("Failed to export data. See console for details.");
+    }
+  };
+
+  /**
+   * Import purchases and recipes from a JSON file. The file should
+   * have the same structure as produced by exportData(). Existing data
+   * will be deleted before importing. A confirmation prompt is
+   * displayed before overwriting user data. After import, the page
+   * reloads to show the new data.
+   * @param {File} file
+   */
+  window.importData = function importData(file) {
+    if (!file) return;
+    if (!window.ppStore || !window.ppStore.nukeUserData) {
+      alert("Import not available: store API missing.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function () {
+      try {
+        const parsed = JSON.parse(reader.result);
+        if (!parsed || typeof parsed !== "object") throw new Error();
+        const { purchases: importedPurchases, recipes: importedRecipes } = parsed;
+        if (!Array.isArray(importedPurchases) || !Array.isArray(importedRecipes)) {
+          throw new Error();
+        }
+        if (!confirm("Importing will replace all current data with data from the file. Continue?")) {
+          return;
+        }
+        // Wipe existing data
+        window.ppStore.nukeUserData();
+        // Insert purchases first so recipes can reference them
+        importedPurchases.forEach((p) => {
+          // Ensure each purchase has an id
+          if (p && p.id) window.ppStore.upsertPurchase(p);
+        });
+        importedRecipes.forEach((r) => {
+          if (r && r.id) window.ppStore.upsertRecipe(r);
+        });
+        alert("Data imported successfully.");
+        window.location.reload();
+      } catch (e) {
+        console.error("ProfitPlate import failed", e);
+        alert("Invalid import file. Please select a valid JSON export from ProfitPlate.");
+      }
+    };
+    reader.readAsText(file);
+  };
   // ===========================
   // Shared unit helpers
   // ===========================

@@ -171,6 +171,60 @@ button.btn-primary {
   background: #c73d3d;
 }
 
+/* Recipe scaling control */
+.recipe-scale {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+}
+.recipe-scale label {
+  margin-right: 6px;
+  font-weight: 500;
+}
+.recipe-scale input {
+  border: 1px solid #cfd5db;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 14px;
+  width: 70px;
+}
+
+/* Responsive adjustments for narrow screens */
+@media (max-width: 600px) {
+  .header-inner {
+    padding: 12px 12px 0;
+  }
+  .hero-banner {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  .hero-title-block {
+    margin: 12px 0;
+  }
+  nav .nav-list {
+    flex-direction: column;
+    gap: 12px;
+  }
+  nav .nav-link {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .recipe-box {
+    padding: 16px;
+  }
+  table {
+    font-size: 12px;
+  }
+  table thead th,
+  table tbody td {
+    padding: 6px;
+  }
+}
+
 /* Generic select styling for dynamic selects */
 .form-select {
   width: 100%;

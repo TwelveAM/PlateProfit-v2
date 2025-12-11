@@ -28,16 +28,16 @@
       <div class="hero-icons"><span role="img" aria-label="scales">⚖️</span></div>
       <div class="hero-title-block">
         <div class="hero-title-banner">PROFITPLATE</div>
-        <div class="hero-subtitle-banner">Know your profit per plate.</div>
+        <div class="hero-subtitle-banner" data-i18n="hero_subtitle">Know your profit per plate.</div>
       </div>
       <div class="hero-icons"><span role="img" aria-label="meat">🥩</span></div>
     </div>
     <nav>
       <ul class="nav-list">
-        <li><a class="nav-link" data-page="home" href="index.html">Home</a></li>
-        <li><a class="nav-link" data-page="purchases" href="purchases.html">Purchases</a></li>
-        <li><a class="nav-link" data-page="recipes" href="recipes.html">Recipes</a></li>
-        <li><a class="nav-link" data-page="settings" href="settings.html">Settings</a></li>
+        <li><a class="nav-link" data-page="home" href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a class="nav-link" data-page="purchases" href="purchases.html" data-i18n="nav_purchases">Purchases</a></li>
+        <li><a class="nav-link" data-page="recipes" href="recipes.html" data-i18n="nav_recipes">Recipes</a></li>
+        <li><a class="nav-link" data-page="settings" href="settings.html" data-i18n="nav_settings">Settings</a></li>
       </ul>
     </nav>
   </div>
