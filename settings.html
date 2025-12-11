@@ -1,0 +1,161 @@
+<!-- ProfitPlate v2 Settings Page -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings – ProfitPlate v2</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <div id="site-header"></div>
+    <div class="page">
+      <h1>Settings</h1>
+      <p class="text-muted" style="margin-bottom:24px;">
+        Adjust how ProfitPlate behaves in your kitchen – currency, display options
+        and data controls. In the real app, these settings would be stored in
+        your account and synced across devices.
+      </p>
+      <!-- General settings -->
+      <div class="settings-box" id="settings-general">
+        <div class="settings-title">General</div>
+        <div style="margin-bottom:16px;">
+          <label for="currency-select">Currency</label><br />
+          <select id="currency-select"></select>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label for="number-format-select">Number format</label><br />
+          <select id="number-format-select">
+            <option value="eu">1.234,56 (EU style)</option>
+            <option value="us">1,234.56 (US/UK style)</option>
+          </select>
+        </div>
+      </div>
+      <!-- Behaviour settings -->
+      <div class="settings-box" id="settings-behaviour">
+        <div class="settings-title">Behaviour</div>
+        <label style="display:block; margin-bottom:12px;">
+          <input type="checkbox" id="auto-recalc-toggle" /> Auto‑recalculate
+          recipes
+        </label>
+        <p class="settings-note">
+          When an ingredient price changes in Purchases, update recipe costs
+          automatically.
+        </p>
+        <label style="display:block; margin-top:16px; margin-bottom:12px;">
+          <input type="checkbox" id="show-advanced-toggle" /> Show advanced
+          details
+        </label>
+        <p class="settings-note">
+          Display margin %, batch cost and ingredient breakdown by default. Turn
+          off for a simpler view.
+        </p>
+      </div>
+      <!-- Data settings -->
+      <div class="settings-box" id="settings-data">
+        <div class="settings-title">Data &amp; Local Storage</div>
+        <p class="text-muted" style="margin-bottom:16px;">
+          ProfitPlate keeps everything in your browser. No server, no cloud.
+        </p>
+        <div style="margin-bottom:16px;">
+          <h3 style="margin:0 0 8px; font-size:1.1rem;">Demo Data</h3>
+          <button id="remove-demo-btn" class="btn btn-secondary">
+            Remove Demo Items
+          </button>
+        </div>
+        <hr />
+        <div class="danger-zone" style="margin-top:16px;">
+          <h3 style="margin:0 0 8px; font-size:1.1rem;">Danger Zone</h3>
+          <button id="delete-data-btn" class="btn btn-danger">
+            Delete My Data
+          </button>
+          <p class="settings-note">
+            Delete ALL your Purchases and Recipes. This cannot be undone.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Scripts -->
+    <script src="assets/header.js"></script>
+    <script src="assets/app.js"></script>
+    <script src="assets/tour.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        if (typeof renderHeader === 'function') renderHeader('settings');
+        // Populate currency options
+        const currencySelect = document.getElementById('currency-select');
+        const currencyOptions = [
+          ['EUR', '€ – Euro'],
+          ['RON', 'lei – Romanian leu'],
+          ['USD', '$ – US Dollar'],
+          ['GBP', '£ – British Pound'],
+        ];
+        currencyOptions.forEach(([value, label]) => {
+          const opt = document.createElement('option');
+          opt.value = value;
+          opt.textContent = label;
+          currencySelect.appendChild(opt);
+        });
+        // Load existing settings
+        const settings = (window.loadSettings && window.loadSettings()) || {};
+        currencySelect.value = settings.currency || 'EUR';
+        document.getElementById('number-format-select').value =
+          settings.locale === 'us' ? 'us' : 'eu';
+        document.getElementById('auto-recalc-toggle').checked =
+          settings.autoRecalc !== false;
+        document.getElementById('show-advanced-toggle').checked =
+          settings.showAdvanced !== false;
+        // Save handlers
+        currencySelect.addEventListener('change', function () {
+          if (window.saveSettings) window.saveSettings({ currency: this.value });
+        });
+        document
+          .getElementById('number-format-select')
+          .addEventListener('change', function () {
+            if (window.saveSettings) {
+              window.saveSettings({ locale: this.value });
+            }
+          });
+        document
+          .getElementById('auto-recalc-toggle')
+          .addEventListener('change', function () {
+            if (window.saveSettings) {
+              window.saveSettings({ autoRecalc: this.checked });
+            }
+          });
+        document
+          .getElementById('show-advanced-toggle')
+          .addEventListener('change', function () {
+            if (window.saveSettings) {
+              window.saveSettings({ showAdvanced: this.checked });
+            }
+          });
+        // Remove demo data
+        document
+          .getElementById('remove-demo-btn')
+          .addEventListener('click', function () {
+            if (window.ppStore && window.ppStore.removeDemoData) {
+              window.ppStore.removeDemoData();
+              alert('Demo items removed.');
+            }
+          });
+        // Delete all data
+        document
+          .getElementById('delete-data-btn')
+          .addEventListener('click', function () {
+            if (
+              confirm(
+                'This will delete all purchases and recipes. This cannot be undone. Continue?'
+              )
+            ) {
+              if (window.ppStore && window.ppStore.nukeUserData) {
+                window.ppStore.nukeUserData();
+                alert('All data deleted.');
+              }
+            }
+          });
+      });
+    </script>
+  </body>
+</html>

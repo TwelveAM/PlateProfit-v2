@@ -1,0 +1,74 @@
+<!-- ProfitPlate v2 Recipes Page -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipes – ProfitPlate v2</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <div id="site-header"></div>
+    <div class="page">
+      <h1>Recipes</h1>
+      <p class="text-muted" style="margin-bottom:24px;">
+        Build your recipes by picking ingredients from Purchases and see cost per
+        portion, selling price and margin. Each recipe is saved locally in your
+        browser.
+      </p>
+      <button class="btn btn-primary" onclick="showRecipeForm()">
+        Add recipe
+      </button>
+      <!-- Recipe form -->
+      <div id="recipe-form-wrapper" class="hidden mt-20">
+        <h2 id="recipe-form-title">Add a new recipe</h2>
+        <form id="recipe-form">
+          <input type="hidden" id="recipe-id" />
+          <div style="margin-bottom:16px;">
+            <label for="recipe-name">Name</label><br />
+            <input id="recipe-name" required />
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:16px; margin-bottom:16px;">
+            <div style="flex:1; min-width:200px;">
+              <label for="recipe-portions">Portions per batch</label><br />
+              <input id="recipe-portions" type="number" min="1" step="1" />
+            </div>
+            <div style="flex:1; min-width:200px;">
+              <label for="recipe-price">Selling price (optional)</label><br />
+              <input id="recipe-price" type="number" min="0" step="0.01" />
+            </div>
+          </div>
+          <div id="ingredients-container" style="margin-bottom:16px;"></div>
+          <button type="button" class="btn btn-secondary" onclick="addIngredientRow()">
+            Add ingredient
+          </button>
+          <div style="margin-top:24px; display:flex; gap:12px;">
+            <button type="button" class="btn btn-secondary" onclick="hideRecipeForm()">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">Save recipe</button>
+          </div>
+        </form>
+      </div>
+      <hr />
+      <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-top:20px;">
+        <input id="recipe-search" type="search" placeholder="Search recipes…" style="flex:1; min-width:200px;" />
+        <label style="display:flex; align-items:center; gap:6px;">
+          <input type="checkbox" id="show-archived-toggle" /> Show archived
+        </label>
+      </div>
+      <div id="recipes-list" class="mt-20"></div>
+    </div>
+    <!-- Scripts -->
+    <script src="assets/header.js"></script>
+    <script src="assets/app.js"></script>
+    <script src="assets/recipes.js"></script>
+    <script src="assets/tour.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        if (typeof renderHeader === 'function') renderHeader('recipes');
+      });
+    </script>
+  </body>
+</html>
