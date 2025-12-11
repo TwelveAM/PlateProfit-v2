@@ -14,7 +14,7 @@
     <div id="site-header"></div>
     <div class="page">
       <h1 data-i18n="settings_title">Settings</h1>
-      <p class="text-muted" style="margin-bottom:24px;">
+      <p class="text-muted" style="margin-bottom:24px;" data-i18n="settings_intro">
         Adjust how ProfitPlate behaves in your kitchen – currency, display options
         and data controls. In the real app, these settings would be stored in
         your account and synced across devices.
@@ -23,11 +23,11 @@
       <div class="settings-box" id="settings-general">
         <div class="settings-title" data-i18n="settings_general">General</div>
         <div style="margin-bottom:16px;">
-          <label for="currency-select">Currency</label><br />
+          <label for="currency-select" data-i18n="field_currency">Currency</label><br />
           <select id="currency-select"></select>
         </div>
         <div style="margin-bottom:16px;">
-          <label for="number-format-select">Number format</label><br />
+          <label for="number-format-select" data-i18n="field_number_format">Number format</label><br />
           <select id="number-format-select">
             <option value="eu">1.234,56 (EU style)</option>
             <option value="us">1,234.56 (US/UK style)</option>
@@ -36,12 +36,13 @@
 
         <!-- Language selection -->
         <div style="margin-bottom:16px;">
-          <label for="language-select">Language</label><br />
+          <label for="language-select" data-i18n="field_language">Language</label><br />
           <select id="language-select">
             <option value="en">English</option>
             <option value="ro">Română</option>
             <option value="es">Español</option>
             <option value="fr">Français</option>
+            <option value="it">Italiano</option>
           </select>
         </div>
       </div>
@@ -49,18 +50,16 @@
       <div class="settings-box" id="settings-behaviour">
         <div class="settings-title" data-i18n="settings_behaviour">Behaviour</div>
         <label style="display:block; margin-bottom:12px;">
-          <input type="checkbox" id="auto-recalc-toggle" /> Auto‑recalculate
-          recipes
+          <input type="checkbox" id="auto-recalc-toggle" /> <span data-i18n="auto_recalc_label">Auto‑recalculate recipes</span>
         </label>
-        <p class="settings-note">
+        <p class="settings-note" data-i18n="auto_recalc_desc">
           When an ingredient price changes in Purchases, update recipe costs
           automatically.
         </p>
         <label style="display:block; margin-top:16px; margin-bottom:12px;">
-          <input type="checkbox" id="show-advanced-toggle" /> Show advanced
-          details
+          <input type="checkbox" id="show-advanced-toggle" /> <span data-i18n="show_advanced_label">Show advanced details</span>
         </label>
-        <p class="settings-note">
+        <p class="settings-note" data-i18n="show_advanced_desc">
           Display margin %, batch cost and ingredient breakdown by default. Turn
           off for a simpler view.
         </p>
@@ -68,34 +67,35 @@
       <!-- Data settings -->
       <div class="settings-box" id="settings-data">
         <div class="settings-title" data-i18n="settings_data">Data &amp; Local Storage</div>
-        <p class="text-muted" style="margin-bottom:16px;">
+        <!-- Description about local storage -->
+        <p class="text-muted" style="margin-bottom:16px;" data-i18n="data_intro">
           ProfitPlate keeps everything in your browser. No server, no cloud.
         </p>
+        <!-- Demo data section -->
         <div style="margin-bottom:16px;">
-          <h3 style="margin:0 0 8px; font-size:1.1rem;">Demo Data</h3>
-          <button id="remove-demo-btn" class="btn btn-secondary">
+          <h3 style="margin:0 0 8px; font-size:1.1rem;" data-i18n="demo_data_title">Demo Data</h3>
+          <button id="remove-demo-btn" class="btn btn-secondary" data-i18n="remove_demo_btn">
             Remove Demo Items
           </button>
         </div>
-
         <!-- Import / Export section -->
         <div style="margin-bottom:16px;">
-          <h3 style="margin:0 0 8px; font-size:1.1rem;">Import/Export</h3>
-          <button id="export-data-btn" class="btn btn-secondary" style="margin-right:8px;">
+          <h3 style="margin:0 0 8px; font-size:1.1rem;" data-i18n="import_export_title">Import/Export</h3>
+          <button id="export-data-btn" class="btn btn-secondary" style="margin-right:8px;" data-i18n="export_data_btn">
             Export Data
           </button>
-          <button id="import-data-btn" class="btn btn-secondary">
+          <button id="import-data-btn" class="btn btn-secondary" data-i18n="import_data_btn">
             Import Data
           </button>
           <input type="file" id="import-data-file" accept=".json" style="display:none" />
         </div>
         <hr />
         <div class="danger-zone" style="margin-top:16px;">
-          <h3 style="margin:0 0 8px; font-size:1.1rem;">Danger Zone</h3>
-          <button id="delete-data-btn" class="btn btn-danger">
+          <h3 style="margin:0 0 8px; font-size:1.1rem;" data-i18n="danger_zone_title">Danger Zone</h3>
+          <button id="delete-data-btn" class="btn btn-danger" data-i18n="delete_data_btn">
             Delete My Data
           </button>
-          <p class="settings-note">
+          <p class="settings-note" data-i18n="delete_warning">
             Delete ALL your Purchases and Recipes. This cannot be undone.
           </p>
         </div>
