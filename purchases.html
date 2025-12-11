@@ -14,25 +14,25 @@
     <div id="site-header"></div>
     <div class="page">
       <h1 data-i18n="purchases_title">Purchases</h1>
-      <p class="text-muted" style="margin-bottom:24px;">
+      <p class="text-muted" style="margin-bottom:24px;" data-i18n="purchases_intro">
         This is your ingredient base. Add items you buy, organise them by
         category, and keep supplier prices up to date. Recipes will use
         everything you add here.
       </p>
-      <button class="btn btn-primary" onclick="toggleAddForm()">
+      <button class="btn btn-primary" onclick="toggleAddForm()" data-i18n="purchases_add_btn">
         Add item
       </button>
       <!-- Add item form -->
       <div id="add-item-form" class="mt-20 hidden">
-        <h2 id="add-item-title">Add a new purchase item</h2>
+        <h2 id="add-item-title" data-i18n="purchases_add_title">Add a new purchase item</h2>
         <form id="purchase-form">
           <div style="margin-bottom:16px;">
-            <label for="item-name">Name</label><br />
+            <label for="item-name" data-i18n="field_name">Name</label><br />
             <input id="item-name" required />
           </div>
           <div style="display:flex; flex-wrap:wrap; gap:16px; margin-bottom:16px;">
             <div style="flex:1; min-width:200px;">
-              <label for="item-category">Category</label><br />
+              <label for="item-category" data-i18n="field_category">Category</label><br />
               <select id="item-category">
                 <option value="">Select…</option>
                 <option>Meat &amp; Fish</option>
@@ -44,13 +44,13 @@
               </select>
             </div>
             <div style="flex:1; min-width:200px;">
-              <label for="item-subtype">Sub‑type</label><br />
+              <label for="item-subtype" data-i18n="field_subtype">Sub‑type</label><br />
               <select id="item-subtype">
                 <option value="">Select…</option>
               </select>
             </div>
             <div style="flex:1; min-width:200px;">
-              <label for="item-unit">Unit (for recipes)</label><br />
+              <label for="item-unit" data-i18n="field_unit">Unit (for recipes)</label><br />
               <select id="item-unit">
                 <option value="kg">kg</option>
                 <option value="g">gr</option>
@@ -60,41 +60,41 @@
               </select>
             </div>
             <div style="flex:1; min-width:200px;">
-              <label for="item-price">Purchase price (per recipe unit)</label><br />
+              <label for="item-price" data-i18n="field_price">Purchase price (per recipe unit)</label><br />
               <input id="item-price" type="number" min="0" step="0.0001" />
             </div>
           </div>
           <div style="display:flex; flex-wrap:wrap; gap:16px; margin-bottom:16px;">
             <div style="flex:1; min-width:200px;">
-              <label for="item-supplier">Supplier</label><br />
+              <label for="item-supplier" data-i18n="field_supplier">Supplier</label><br />
               <input id="item-supplier" />
             </div>
             <div style="flex:1; min-width:200px;">
-              <label for="item-invoice-number">Invoice number</label><br />
+              <label for="item-invoice-number" data-i18n="field_invoice_number">Invoice number</label><br />
               <input id="item-invoice-number" />
             </div>
             <div style="flex:1; min-width:200px;">
-              <label for="item-invoice-date">Invoice date</label><br />
+              <label for="item-invoice-date" data-i18n="field_invoice_date">Invoice date</label><br />
               <input id="item-invoice-date" type="date" />
             </div>
           </div>
           <div style="margin-bottom:16px;">
-            <label for="item-notes">Notes (storage, etc.)</label><br />
+            <label for="item-notes" data-i18n="field_notes">Notes (storage, etc.)</label><br />
             <textarea id="item-notes" rows="2"></textarea>
           </div>
           <!-- Pack helper -->
           <details style="margin-bottom:16px;">
-            <summary style="cursor:pointer;">Use pack helper</summary>
-            <p class="text-muted" style="margin-top:8px;">
+            <summary style="cursor:pointer;" data-i18n="pack_helper_summary">Use pack helper</summary>
+            <p class="text-muted" style="margin-top:8px;" data-i18n="pack_example">
               Example: 100 gr for 5 € → auto‑converts price per unit.
             </p>
             <div style="display:flex; flex-wrap:wrap; gap:16px; margin-top:8px;">
               <div style="flex:1; min-width:160px;">
-                <label for="pack-qty">Pack quantity</label><br />
+                <label for="pack-qty" data-i18n="pack_quantity">Pack quantity</label><br />
                 <input id="pack-qty" type="number" min="0" step="0.001" />
               </div>
               <div style="flex:1; min-width:160px;">
-                <label for="pack-unit">Pack unit</label><br />
+                <label for="pack-unit" data-i18n="pack_unit">Pack unit</label><br />
                 <select id="pack-unit">
                   <option value="kg">kg</option>
                   <option value="g">gr</option>
@@ -104,11 +104,11 @@
                 </select>
               </div>
               <div style="flex:1; min-width:160px;">
-                <label for="pack-price">Pack price (€)</label><br />
+                <label for="pack-price" data-i18n="pack_price">Pack price (€)</label><br />
                 <input id="pack-price" type="number" min="0" step="0.0001" />
               </div>
               <div style="display:flex; align-items:end;">
-                <button type="button" class="btn btn-secondary" onclick="fillPriceFromPack()">
+                <button type="button" class="btn btn-secondary" onclick="fillPriceFromPack()" data-i18n="pack_use">
                   Use pack
                 </button>
               </div>
@@ -116,8 +116,8 @@
           </details>
           <!-- Price history -->
           <div id="price-history-block" class="hidden mt-20">
-            <h3>Price history</h3>
-            <p class="text-muted">
+            <h3 data-i18n="price_history_title">Price history</h3>
+            <p class="text-muted" data-i18n="price_history_desc">
               Last 10 recorded price changes for this ingredient (newest first).
             </p>
             <table>
@@ -131,22 +131,22 @@
             </table>
           </div>
           <div style="margin-top:24px; display:flex; gap:12px;">
-            <button type="button" class="btn btn-secondary" onclick="toggleAddForm()">
+            <button type="button" class="btn btn-secondary" onclick="toggleAddForm()" data-i18n="btn_cancel">
               Cancel
             </button>
-            <button type="submit" class="btn btn-primary">Save item</button>
+            <button type="submit" class="btn btn-primary" data-i18n="btn_save_item">Save item</button>
           </div>
         </form>
       </div>
       <hr />
-      <h2>Recently updated</h2>
+      <h2 data-i18n="recently_updated_title">Recently updated</h2>
       <div id="recent-list" class="mt-10"></div>
       <hr />
-      <h2>All ingredients</h2>
+      <h2 data-i18n="all_ingredients_title">All ingredients</h2>
       <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-bottom:12px;">
-        <input id="search-input" type="search" placeholder="Search…" style="flex:1; min-width:200px;" />
+        <input id="search-input" type="search" style="flex:1; min-width:200px;" data-i18n-placeholder="search_placeholder" placeholder="Search…" />
         <select id="category-filter" style="min-width:200px;">
-          <option value="">All categories</option>
+          <option value="" data-i18n="all_categories_option">All categories</option>
           <option>Meat &amp; Fish</option>
           <option>Dairy &amp; Eggs</option>
           <option>Vegetables &amp; Fruit</option>
@@ -154,22 +154,22 @@
           <option>Spices &amp; Condiments</option>
           <option>Other</option>
         </select>
-        <button type="button" class="btn btn-secondary" onclick="window.print()">
+        <button type="button" class="btn btn-secondary" onclick="window.print()" data-i18n="btn_print_list">
           Print list
         </button>
       </div>
       <table id="ingredients-table">
         <thead>
           <tr>
-            <th>Ingredient</th>
-            <th>Category</th>
-            <th>Sub‑type</th>
-            <th>Supplier</th>
-            <th>Invoice #</th>
-            <th>Unit</th>
-            <th>Latest price</th>
-            <th>Last updated</th>
-            <th>Actions</th>
+            <th data-i18n="table_ingredient">Ingredient</th>
+            <th data-i18n="table_category">Category</th>
+            <th data-i18n="table_subtype">Sub‑type</th>
+            <th data-i18n="table_supplier">Supplier</th>
+            <th data-i18n="table_invoice">Invoice #</th>
+            <th data-i18n="table_unit">Unit</th>
+            <th data-i18n="table_price">Latest price</th>
+            <th data-i18n="table_updated">Last updated</th>
+            <th data-i18n="table_actions">Actions</th>
           </tr>
         </thead>
         <tbody id="purchase-table"></tbody>

@@ -14,49 +14,49 @@
     <div id="site-header"></div>
     <div class="page">
       <h1 data-i18n="recipes_title">Recipes</h1>
-      <p class="text-muted" style="margin-bottom:24px;">
+      <p class="text-muted" style="margin-bottom:24px;" data-i18n="recipes_intro">
         Build your recipes by picking ingredients from Purchases and see cost per
         portion, selling price and margin. Each recipe is saved locally in your
         browser.
       </p>
-      <button class="btn btn-primary" onclick="showRecipeForm()">
+      <button class="btn btn-primary" onclick="showRecipeForm()" data-i18n="recipes_add_btn">
         Add recipe
       </button>
       <!-- Recipe form -->
       <div id="recipe-form-wrapper" class="hidden mt-20">
-        <h2 id="recipe-form-title">Add a new recipe</h2>
+        <h2 id="recipe-form-title" data-i18n="recipes_form_title">Add a new recipe</h2>
         <form id="recipe-form">
           <input type="hidden" id="recipe-id" />
           <div style="margin-bottom:16px;">
-            <label for="recipe-name">Name</label><br />
+            <label for="recipe-name" data-i18n="recipe_name">Name</label><br />
             <input id="recipe-name" required />
           </div>
           <div style="display:flex; flex-wrap:wrap; gap:16px; margin-bottom:16px;">
             <div style="flex:1; min-width:200px;">
-              <label for="recipe-portions">Portions per batch</label><br />
+              <label for="recipe-portions" data-i18n="recipe_portions">Portions per batch</label><br />
               <input id="recipe-portions" type="number" min="1" step="1" />
             </div>
             <div style="flex:1; min-width:200px;">
-              <label for="recipe-price">Selling price (optional)</label><br />
+              <label for="recipe-price" data-i18n="recipe_price">Selling price (optional)</label><br />
               <input id="recipe-price" type="number" min="0" step="0.01" />
             </div>
           </div>
           <div id="ingredients-container" style="margin-bottom:16px;"></div>
-          <button type="button" class="btn btn-secondary" onclick="addIngredientRow()">
+          <button type="button" class="btn btn-secondary" onclick="addIngredientRow()" data-i18n="add_ingredient_btn">
             Add ingredient
           </button>
           <div style="margin-top:24px; display:flex; gap:12px;">
-            <button type="button" class="btn btn-secondary" onclick="hideRecipeForm()">
+            <button type="button" class="btn btn-secondary" onclick="hideRecipeForm()" data-i18n="btn_cancel">
               Cancel
             </button>
-            <button type="submit" class="btn btn-primary">Save recipe</button>
+            <button type="submit" class="btn btn-primary" data-i18n="btn_save_recipe">Save recipe</button>
           </div>
         </form>
       </div>
       <hr />
       <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-top:20px;">
-        <input id="recipe-search" type="search" placeholder="Search recipes…" style="flex:1; min-width:200px;" />
-        <label style="display:flex; align-items:center; gap:6px;">
+        <input id="recipe-search" type="search" style="flex:1; min-width:200px;" data-i18n-placeholder="recipe_search_placeholder" placeholder="Search recipes…" />
+        <label style="display:flex; align-items:center; gap:6px;" data-i18n="show_archived_label">
           <input type="checkbox" id="show-archived-toggle" /> Show archived
         </label>
       </div>
