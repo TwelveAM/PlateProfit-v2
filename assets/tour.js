@@ -54,7 +54,8 @@
     {
       id: "purchases-table",
       page: "purchases",
-      selector: "table",
+      // highlight the main ingredients table explicitly via an id to avoid matching hidden tables
+      selector: "#ingredients-table",
       title: "Latest price always visible",
       text:
         "Each row is an ingredient with its latest price. When you change prices here, " +
@@ -65,7 +66,8 @@
     {
       id: "recipes-overview",
       page: "recipes",
-      selector: ".page h1, .page h2",
+      // highlight the container that will display recipe cards
+      selector: "#recipes-list",
       title: "Recipes: cost per dish and margin",
       text:
         "This is where you’ll see each dish on your menu, its cost per portion, selling price, " +
@@ -252,7 +254,9 @@
     if (step.selector) {
       targetEl = document.querySelector(step.selector);
       if (targetEl) {
-        targetEl.scrollIntoView({ block: "center", behavior: "smooth" });
+        // Scroll element into view synchronously. Using 'smooth' caused misalignment when
+        // computing boundingClientRect() before the scroll finished, so prefer instant scroll.
+        targetEl.scrollIntoView({ block: "center" });
         const rect = targetEl.getBoundingClientRect();
         if (rect.width > 10 && rect.height > 10) {
           targetRect = rect;
